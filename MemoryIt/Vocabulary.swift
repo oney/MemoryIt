@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+@objc(Vocabulary)
 class Vocabulary: NSManagedObject {
 
     @NSManaged var word: String
