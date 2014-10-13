@@ -4,3 +4,5 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <PaperFold/PaperFoldView.h>
+#import "TFHpple.h"
+#import "NSString+HTML.h"

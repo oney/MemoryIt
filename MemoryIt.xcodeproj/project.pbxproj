@@ -18,6 +18,9 @@
 		6B24EA4119E80ED100342EB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B24EA4019E80ED100342EB0 /* Images.xcassets */; };
 		6B24EA4419E80ED100342EB0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B24EA4219E80ED100342EB0 /* LaunchScreen.xib */; };
 		6B24EA5019E80ED100342EB0 /* MemoryItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24EA4F19E80ED100342EB0 /* MemoryItTests.swift */; };
+		6B51185019EADFF5009F52F8 /* WordSelectedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */; };
+		6B51185519EBEFE8009F52F8 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185419EBEFE8009F52F8 /* NSString+HTML.m */; };
+		6B51185719EC078B009F52F8 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185619EC078B009F52F8 /* Article.swift */; };
 		6BDC943219E9CF9700A6FB3D /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDC943019E9CF9700A6FB3D /* WordCell.swift */; };
 		6BDC943319E9CF9700A6FB3D /* WordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDC943119E9CF9700A6FB3D /* WordCell.xib */; };
 		6BDC943519E9D4FD00A6FB3D /* WordFolds.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDC943419E9D4FD00A6FB3D /* WordFolds.xib */; };
@@ -49,6 +52,10 @@
 		6B24EA4919E80ED100342EB0 /* MemoryItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B24EA4E19E80ED100342EB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B24EA4F19E80ED100342EB0 /* MemoryItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryItTests.swift; sourceTree = "<group>"; };
+		6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSelectedArray.swift; sourceTree = "<group>"; };
+		6B51185319EBEFE8009F52F8 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		6B51185419EBEFE8009F52F8 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		6B51185619EC078B009F52F8 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		6BDC943019E9CF9700A6FB3D /* WordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
 		6BDC943119E9CF9700A6FB3D /* WordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordCell.xib; sourceTree = "<group>"; };
 		6BDC943419E9D4FD00A6FB3D /* WordFolds.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordFolds.xib; sourceTree = "<group>"; };
@@ -91,6 +98,8 @@
 				6B01001119E83F4F006D4E02 /* CoreDataStore.swift */,
 				6B01000A19E83870006D4E02 /* DataManager.swift */,
 				6B01000F19E839EF006D4E02 /* Vocabulary.swift */,
+				6B51185619EC078B009F52F8 /* Article.swift */,
+				6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -140,8 +149,9 @@
 				6B01000919E82AD4006D4E02 /* View */,
 				6B01000819E82AC5006D4E02 /* Controller */,
 				6B01000719E82ABF006D4E02 /* Model */,
-				6B24EA3D19E80ED100342EB0 /* Main.storyboard */,
+				6B51185219EBEB05009F52F8 /* Category */,
 				6B24EA4019E80ED100342EB0 /* Images.xcassets */,
+				6B24EA3D19E80ED100342EB0 /* Main.storyboard */,
 				6B24EA4219E80ED100342EB0 /* LaunchScreen.xib */,
 				6B24EA3819E80ED100342EB0 /* MemoryIt.xcdatamodeld */,
 				6B24EA3419E80ED100342EB0 /* Supporting Files */,
@@ -173,6 +183,15 @@
 				6B24EA4E19E80ED100342EB0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6B51185219EBEB05009F52F8 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				6B51185319EBEFE8009F52F8 /* NSString+HTML.h */,
+				6B51185419EBEFE8009F52F8 /* NSString+HTML.m */,
+			);
+			name = Category;
 			sourceTree = "<group>";
 		};
 		7D942313741C451C24943EE2 /* Frameworks */ = {
@@ -324,8 +343,11 @@
 				6B24EA3C19E80ED100342EB0 /* ViewController.swift in Sources */,
 				6BDC943219E9CF9700A6FB3D /* WordCell.swift in Sources */,
 				6B01001019E839EF006D4E02 /* Vocabulary.swift in Sources */,
+				6B51185719EC078B009F52F8 /* Article.swift in Sources */,
+				6B51185519EBEFE8009F52F8 /* NSString+HTML.m in Sources */,
 				6B01000B19E83870006D4E02 /* DataManager.swift in Sources */,
 				6B24EA3719E80ED100342EB0 /* AppDelegate.swift in Sources */,
+				6B51185019EADFF5009F52F8 /* WordSelectedArray.swift in Sources */,
 				6B24EA3A19E80ED100342EB0 /* MemoryIt.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

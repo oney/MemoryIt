@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - hpple (0.2.0)
   - Mantle (1.5.1):
     - Mantle/extobjc
   - Mantle/extobjc (1.5.1)
@@ -27,12 +28,18 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - hpple (~> 0.2)
   - Mantle (~> 1.5)
-  - PaperFold (~> 1.1)
+  - PaperFold (from `https://github.com/oney/PaperFold-for-iOS.git`)
+
+EXTERNAL SOURCES:
+  PaperFold:
+    :git: https://github.com/oney/PaperFold-for-iOS.git
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  hpple: f4eb7c21a8db83ec264e5d614ec7509e10e5adec
   Mantle: d7c5ac734579ec751c58fecbf56189853056c58c
-  PaperFold: 75ccf7b5a7471d828c7c304f947ab2eca36ef4c5
+  PaperFold: a7b0348ac9a48478dcd0b216f7a05fb5e3345961
 
 COCOAPODS: 0.34.1

@@ -19,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")) {
             application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
         }
+        
+        
+//        var string: NSString = "yoo ewerjil yoo ejiwrj"
+//        var error: NSError?
+//        var removeScriptRegex: NSRegularExpression = NSRegularExpression(pattern: "yoo", options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+//        var removeScriptString = removeScriptRegex.stringByReplacingMatchesInString(string, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, string.length), withTemplate: "")
+//        println("string:\(removeScriptString)")
+        
+        
+//        DataManager.sharedInstance.detectUrl("e")
         return true
     }
     
@@ -38,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if !content.isEqualToString(UIPasteboard.generalPasteboard().string!) {
                     content = UIPasteboard.generalPasteboard().string!
                     println("new content:\(content)")
-                    DataManager.sharedInstance.detectVocabulary(content)
+                    DataManager.sharedInstance.detectNewContent(content)
                 }
                 NSThread.sleepForTimeInterval(1)
             }
