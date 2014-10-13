@@ -17,4 +17,25 @@ class Vocabulary: NSManagedObject {
     @NSManaged var sentence: String
     @NSManaged var state: Int16
 
+    class func checkInexist(word: NSString, managedObjectContext: NSManagedObjectContext) -> Bool {
+        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Vocabulary")
+        fetchRequest.predicate = NSPredicate(format:"word == '\(word)' ")
+        fetchRequest.fetchLimit = 1
+        var count = managedObjectContext.countForFetchRequest(fetchRequest, error: nil)
+        return count == 0
+    }
+    
+    class func showAll(managedObjectContext: NSManagedObjectContext) {
+        var fReq: NSFetchRequest = NSFetchRequest(entityName: "Vocabulary")
+        
+        var sorter: NSSortDescriptor = NSSortDescriptor(key: "word" , ascending: false)
+        fReq.sortDescriptors = [sorter]
+        fReq.returnsObjectsAsFaults = false
+        
+        var result = managedObjectContext.executeFetchRequest(fReq, error:nil)
+        for resultItem in result! {
+            var vocabulary = resultItem as Vocabulary
+            NSLog("Vocabulary: \(vocabulary.word) ")
+        }
+    }
 }

@@ -77,16 +77,22 @@ class DataManager  {
     }
     
     func detectUrl(urlString: NSString) {
-        var URL: NSURL = NSURL(string: urlString);
-        NSLog("URL:%@", URL)
         
-        var request: NSURLRequest = NSURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60)
-        var response: NSURLResponse?
-        var error: NSError?
-        var data: NSData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)!
-        
-//        NSLog("myData=%@", data)
-        self.parseHtml(urlString, data: data)
+        var inexist: Bool = Article.checkInexist(urlString, managedObjectContext: self.managedObjectContext!)
+        if inexist {
+            var URL: NSURL = NSURL(string: urlString);
+            var request: NSURLRequest = NSURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60)
+            var response: NSURLResponse?
+            var error: NSError?
+            var data: NSData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)!
+            
+            parseHtml(urlString, data: data)
+        }
+        else {
+            var array = Article.find(urlString, managedObjectContext: self.managedObjectContext!)
+            var firstArticle: Article = array[0] as Article
+            self.generateUrlNotification(firstArticle.title)
+        }
         
         
 //        var request: NSURLRequest = NSURLRequest(URL: URL)
@@ -104,83 +110,51 @@ class DataManager  {
     }
     
     func parseHtml(urlString: NSString, data responseObject: AnyObject!) {
+        println("parseHtml:\(urlString)")
         var string: NSString = NSString(data: responseObject as NSData, encoding: NSUTF8StringEncoding)
         string = removeString(string, by: "<script\\b[^<]*(?:(?!<\\/script>)<[^<]*)*<\\/script>")
-        
-        println("string:\(string)")
         
         var data: NSData = string.dataUsingEncoding(NSUTF8StringEncoding)!
         
         var doc: TFHpple = TFHpple(HTMLData: data)
         var titles = doc.searchWithXPathQuery("//title")
         var title: NSString = self.fetchTitle(titles)
-        
-        println("titles:\(title)")
+//        println("titles:\(title)")
         
         var bodys: NSArray = doc.searchWithXPathQuery("//body")
         var body: NSString = self.fetchBody(bodys)
         println("plain:\(body)")
         
+        var article: Article = NSEntityDescription.insertNewObjectForEntityForName("Article", inManagedObjectContext: self.backgroundContext!) as Article
+        article.url = urlString
+        article.title = title
+        article.content = body
+        saveContext()
+        
+        Article.showAll(self.managedObjectContext!)
+
         self.generateUrlNotification(title)
-        
-        var inexist: Bool = checkUrlInexist(urlString)
-        if !inexist {
-            return
-        }
-        
-//        var article: Article = NSEntityDescription.insertNewObjectForEntityForName("Article", inManagedObjectContext: self.backgroundContext!) as Article
-//        article.content = body
-//        article.title = title
-//        article.url = urlString
-//        self.saveContext()
     }
     
     
     func detectVocabulary(string: NSString) {
+        
+        var inexist: Bool = Vocabulary.checkInexist(string, managedObjectContext: self.managedObjectContext!)
+        if inexist {
+            var vocabulary: Vocabulary = NSEntityDescription.insertNewObjectForEntityForName("Vocabulary", inManagedObjectContext: self.backgroundContext!) as Vocabulary
+            vocabulary.word = string
+            vocabulary.meaning = "heeee"
+            self.saveContext()
+        }
+        
+        var articles: [Article] = Article.search(string, managedObjectContext: self.managedObjectContext!)
+        for article in articles {
+            NSLog("ffffArticle: \(article.url) ")
+        }
+        
         generateNotification(string)
         
-        var inexist: Bool = checkVocabularyInexist(string)
-        if !inexist {
-            return
-        }
-        
-        var vocabulary: Vocabulary = NSEntityDescription.insertNewObjectForEntityForName("Vocabulary", inManagedObjectContext: self.backgroundContext!) as Vocabulary
-        vocabulary.word = string
-        vocabulary.meaning = "heeee"
-        self.saveContext()
-        showAllVocabulary()
-    }
-    
-    func showAllVocabulary() {
-        var fReq: NSFetchRequest = NSFetchRequest(entityName: "Vocabulary")
-        
-        var sorter: NSSortDescriptor = NSSortDescriptor(key: "word" , ascending: false)
-        fReq.sortDescriptors = [sorter]
-        fReq.returnsObjectsAsFaults = false
-        
-        var result = self.managedObjectContext!.executeFetchRequest(fReq, error:nil)
-        for resultItem in result! {
-            var vocabulary = resultItem as Vocabulary
-            NSLog("Vocabulary: \(vocabulary.word) ")
-        }
-    }
-    
-    func checkVocabularyInexist(vocabulary: NSString) -> Bool {
-        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Vocabulary")
-        fetchRequest.predicate = NSPredicate(format:"word CONTAINS '\(vocabulary)' ")
-        fetchRequest.fetchLimit = 1
-        
-        var count = self.managedObjectContext!.countForFetchRequest(fetchRequest, error: nil)
-        return count == 0
-    }
-    
-    func checkUrlInexist(url: NSString) -> Bool {
-        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Article")
-        fetchRequest.predicate = NSPredicate(format:"url CONTAINS '\(url)' ")
-        fetchRequest.fetchLimit = 1
-        
-        var count = self.managedObjectContext!.countForFetchRequest(fetchRequest, error: nil)
-        return count == 0
+        Vocabulary.showAll(self.managedObjectContext!)
     }
     
     func generateNotification(string :NSString) {
@@ -235,5 +209,46 @@ class DataManager  {
         var error: NSError?
         var regex: NSRegularExpression = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
         return regex.stringByReplacingMatchesInString(string, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, string.length), withTemplate: "")
+    }
+    
+    func findWord(word: NSString, by article: NSString) -> [NSString] {
+        var error: NSError?
+        var regex: NSRegularExpression = NSRegularExpression(pattern: word, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+        var matches: NSArray = regex.matchesInString(article, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, article.length))
+        
+        
+        var collect: [NSString] = []
+        for match in matches {
+            var result: NSTextCheckingResult = match as NSTextCheckingResult
+            var forward: NSString = article.substringWithRange(NSMakeRange(0, result.range.location))
+//            NSLog("forward:%@", forward)
+            var forwardRange: NSRange = forward.rangeOfString(". ", options: NSStringCompareOptions.BackwardsSearch)
+            forward = forward.substringWithRange(NSMakeRange(forwardRange.location+forwardRange.length, forward.length-(forwardRange.location+forwardRange.length)))
+            
+            
+            var backwardStart = result.range.location + result.range.length
+            var backward: NSString = article.substringWithRange(NSMakeRange(backwardStart, article.length-backwardStart))
+            var backwardRange: NSRange = backward.rangeOfString(". ")
+            backward = backward.substringWithRange(NSMakeRange(0, backwardRange.location+1))
+            
+            var sentence = "\(forward)\(word)\(backward)"
+            collect.append(sentence)
+        }
+        return collect
+    }
+    
+    func findWord2(word: NSString, by article: NSString) {
+        var find: NSString = "\\.\\s[^(\\.)]*communication[^(\\.)]*\\.\\s" // \.\s[^(\.)]*communication[^(\.)]*\.\s
+        var error: NSError?
+        var regex: NSRegularExpression = NSRegularExpression(pattern: "", options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+        var matches: NSArray = regex.matchesInString(article, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, article.length))
+        
+        for match in matches {
+            var result: NSTextCheckingResult = match as NSTextCheckingResult
+            NSLog("range1:%@", result.rangeAtIndex(0))
+            NSLog("range2:%@", result.range)
+            var string = article.substringWithRange(result.range)
+            NSLog("match:%@", string)
+        }
     }
 }

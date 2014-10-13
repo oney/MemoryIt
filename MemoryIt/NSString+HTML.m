@@ -12,14 +12,16 @@
 
 - (NSString *)stringByStrippingHTML
 {
-    NSString *newString = [[@"" componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
+    NSString *string = @"Here is an example string HELLO ";
     
-    
+    NSRange rangeToSearch = NSMakeRange(0, [string length] - 1); // get a range without the space character
+    NSRange rangeOfSecondToLastSpace = [string rangeOfString:@" " options:NSBackwardsSearch range:rangeToSearch];
+
     
     NSRange r;
     NSString *s = [self copy];
     while ((r = [s rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-        s = [s stringByReplacingCharactersInRange:r withString:@""];
+        s = [s stringByReplacingCharactersInRange:r withString:@". "];
     return s;
 }
 

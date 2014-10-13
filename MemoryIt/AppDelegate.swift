@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
         }
         
+//        var body: NSString = ". Apple is a multinational corporation that designs, develops, and sells consumer electronics, computer software, and personal computers. Its product portfolio includes mobile communication and media devices, personal computers. Portable digital music communication, software, services, peripherals, networking solutions, third-party digital content, and applications related to its products. "
+//
+//        var array = DataManager.sharedInstance.findWord("communication", by: body)
+//        NSLog("array:%@", array)
         
 //        var string: NSString = "yoo ewerjil yoo ejiwrj"
 //        var error: NSError?
