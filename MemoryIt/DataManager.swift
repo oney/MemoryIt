@@ -52,6 +52,10 @@ class DataManager  {
         self.saveContext( self.backgroundContext! )
     }
     
+    func runnn() {
+        Article.showAll(self.managedObjectContext!)
+    }
+    
     func detectNewContent(string: NSString) {
         if isUrl(string) {
             detectUrl(string)
@@ -139,20 +143,37 @@ class DataManager  {
     
     func detectVocabulary(string: NSString) {
         
-        var inexist: Bool = Vocabulary.checkInexist(string, managedObjectContext: self.managedObjectContext!)
-        if inexist {
+        var findVocabulary: [Vocabulary] = Vocabulary.find(string, managedObjectContext: self.managedObjectContext!)
+        if findVocabulary.count == 0 {
             var vocabulary: Vocabulary = NSEntityDescription.insertNewObjectForEntityForName("Vocabulary", inManagedObjectContext: self.backgroundContext!) as Vocabulary
             vocabulary.word = string
             vocabulary.meaning = "heeee"
-            self.saveContext()
+            saveContext()
+            findVocabulary = Vocabulary.find(string, managedObjectContext: self.managedObjectContext!)
         }
+        var vocabulary: Vocabulary = findVocabulary[0]
         
         var articles: [Article] = Article.search(string, managedObjectContext: self.managedObjectContext!)
         for article in articles {
             NSLog("ffffArticle: \(article.url) ")
+            var sentences: [NSString] = article.findWord(string)
+            for sentenceString in sentences {
+                
+                var sentence: Sentence = NSEntityDescription.insertNewObjectForEntityForName("Sentence", inManagedObjectContext: self.backgroundContext!) as Sentence
+                
+                var vocabularys: NSMutableSet = sentence.mutableSetValueForKey("vocabularys")
+                vocabularys.addObject(vocabulary)
+                sentence.content = sentenceString
+                sentence.article = self.backgroundContext!.objectWithID(article.objectID) as Article
+                
+//                var sentencesInArticle: NSMutableSet = article.mutableSetValueForKey("sentences")
+//                sentencesInArticle.addObject(sentence)
+                
+                saveContext()
+            }
         }
         
-        generateNotification(string)
+//        generateNotification(string)
         
         Vocabulary.showAll(self.managedObjectContext!)
     }
@@ -196,7 +217,7 @@ class DataManager  {
     
     func fetchBody(array: NSArray) -> NSString {
         if array.count == 0 {
-            return "No Content"
+            return "No content"
         }
         else {
             var body: TFHppleElement = array[0] as TFHppleElement
@@ -209,32 +230,6 @@ class DataManager  {
         var error: NSError?
         var regex: NSRegularExpression = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
         return regex.stringByReplacingMatchesInString(string, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, string.length), withTemplate: "")
-    }
-    
-    func findWord(word: NSString, by article: NSString) -> [NSString] {
-        var error: NSError?
-        var regex: NSRegularExpression = NSRegularExpression(pattern: word, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
-        var matches: NSArray = regex.matchesInString(article, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, article.length))
-        
-        
-        var collect: [NSString] = []
-        for match in matches {
-            var result: NSTextCheckingResult = match as NSTextCheckingResult
-            var forward: NSString = article.substringWithRange(NSMakeRange(0, result.range.location))
-//            NSLog("forward:%@", forward)
-            var forwardRange: NSRange = forward.rangeOfString(". ", options: NSStringCompareOptions.BackwardsSearch)
-            forward = forward.substringWithRange(NSMakeRange(forwardRange.location+forwardRange.length, forward.length-(forwardRange.location+forwardRange.length)))
-            
-            
-            var backwardStart = result.range.location + result.range.length
-            var backward: NSString = article.substringWithRange(NSMakeRange(backwardStart, article.length-backwardStart))
-            var backwardRange: NSRange = backward.rangeOfString(". ")
-            backward = backward.substringWithRange(NSMakeRange(0, backwardRange.location+1))
-            
-            var sentence = "\(forward)\(word)\(backward)"
-            collect.append(sentence)
-        }
-        return collect
     }
     
     func findWord2(word: NSString, by article: NSString) {

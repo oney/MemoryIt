@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        println("string:\(removeScriptString)")
         
         
-//        DataManager.sharedInstance.detectUrl("e")
+        DataManager.sharedInstance.runnn()
         return true
     }
     

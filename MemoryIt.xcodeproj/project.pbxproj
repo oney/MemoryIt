@@ -21,6 +21,7 @@
 		6B51185019EADFF5009F52F8 /* WordSelectedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */; };
 		6B51185519EBEFE8009F52F8 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185419EBEFE8009F52F8 /* NSString+HTML.m */; };
 		6B51185719EC078B009F52F8 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185619EC078B009F52F8 /* Article.swift */; };
+		6B51185D19EC5555009F52F8 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185C19EC5555009F52F8 /* Sentence.swift */; };
 		6BDC943219E9CF9700A6FB3D /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDC943019E9CF9700A6FB3D /* WordCell.swift */; };
 		6BDC943319E9CF9700A6FB3D /* WordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDC943119E9CF9700A6FB3D /* WordCell.xib */; };
 		6BDC943519E9D4FD00A6FB3D /* WordFolds.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDC943419E9D4FD00A6FB3D /* WordFolds.xib */; };
@@ -56,6 +57,7 @@
 		6B51185319EBEFE8009F52F8 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		6B51185419EBEFE8009F52F8 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		6B51185619EC078B009F52F8 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		6B51185C19EC5555009F52F8 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
 		6BDC943019E9CF9700A6FB3D /* WordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
 		6BDC943119E9CF9700A6FB3D /* WordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordCell.xib; sourceTree = "<group>"; };
 		6BDC943419E9D4FD00A6FB3D /* WordFolds.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordFolds.xib; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				6B01000A19E83870006D4E02 /* DataManager.swift */,
 				6B01000F19E839EF006D4E02 /* Vocabulary.swift */,
 				6B51185619EC078B009F52F8 /* Article.swift */,
+				6B51185C19EC5555009F52F8 /* Sentence.swift */,
 				6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */,
 			);
 			name = Model;
@@ -345,6 +348,7 @@
 				6B01001019E839EF006D4E02 /* Vocabulary.swift in Sources */,
 				6B51185719EC078B009F52F8 /* Article.swift in Sources */,
 				6B51185519EBEFE8009F52F8 /* NSString+HTML.m in Sources */,
+				6B51185D19EC5555009F52F8 /* Sentence.swift in Sources */,
 				6B01000B19E83870006D4E02 /* DataManager.swift in Sources */,
 				6B24EA3719E80ED100342EB0 /* AppDelegate.swift in Sources */,
 				6B51185019EADFF5009F52F8 /* WordSelectedArray.swift in Sources */,
