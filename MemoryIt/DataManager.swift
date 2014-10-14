@@ -130,7 +130,8 @@ class DataManager  {
     
     
     func detectVocabulary(string: NSString) {
-        
+        UILocalNotification.forFlash(string)
+        return
         var findVocabulary: [Vocabulary] = Vocabulary.find(string, managedObjectContext: self.managedObjectContext!)
         if findVocabulary.count == 0 {
             var vocabulary: Vocabulary = NSEntityDescription.insertNewObjectForEntityForName("Vocabulary", inManagedObjectContext: self.backgroundContext!) as Vocabulary
@@ -158,7 +159,7 @@ class DataManager  {
             }
         }
         
-        UILocalNotification.forVocabulary(string)
+        UILocalNotification.forFlash(string)
         
         Vocabulary.showAll(self.managedObjectContext!)
     }

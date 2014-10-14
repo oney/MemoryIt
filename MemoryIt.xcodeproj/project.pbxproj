@@ -111,6 +111,7 @@
 		6B01000819E82AC5006D4E02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6B24EA3B19E80ED100342EB0 /* ViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -118,6 +119,9 @@
 		6B01000919E82AD4006D4E02 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6BDC943019E9CF9700A6FB3D /* WordCell.swift */,
+				6BDC943119E9CF9700A6FB3D /* WordCell.xib */,
+				6BDC943419E9D4FD00A6FB3D /* WordFolds.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -146,10 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				6B24EA3619E80ED100342EB0 /* AppDelegate.swift */,
-				6B24EA3B19E80ED100342EB0 /* ViewController.swift */,
-				6BDC943019E9CF9700A6FB3D /* WordCell.swift */,
-				6BDC943119E9CF9700A6FB3D /* WordCell.xib */,
-				6BDC943419E9D4FD00A6FB3D /* WordFolds.xib */,
 				6B01000919E82AD4006D4E02 /* View */,
 				6B01000819E82AC5006D4E02 /* Controller */,
 				6B01000719E82ABF006D4E02 /* Model */,

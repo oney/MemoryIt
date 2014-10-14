@@ -12,6 +12,18 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    enum Actions:String{
+        case increment = "INCREMENT_ACTION"
+        case decrement = "DECREMENT_ACTION"
+        case reset = "RESET_ACTION"
+    }
+    
+    var categoryID:String {
+        get{
+            return "COUNTER_CATEGORY"
+        }
+    }
+    
     var window: UIWindow?
 
 
@@ -33,10 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
 //        DataManager.sharedInstance.runnn()
+        
+        registerNotification()
         return true
     }
     
     func pasteboardChanged(application: UIApplication) {
+        
         var task : UIBackgroundTaskIdentifier!
         task = application.beginBackgroundTaskWithExpirationHandler({
             application.endBackgroundTask(task)
@@ -52,7 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if !content.isEqualToString(UIPasteboard.generalPasteboard().string!) {
                     content = UIPasteboard.generalPasteboard().string!
                     println("new content:\(content)")
-                    DataManager.sharedInstance.detectNewContent(content)
+                    self.forFlash(content)
+//                    DataManager.sharedInstance.detectNewContent(content)
                 }
                 NSThread.sleepForTimeInterval(1)
             }
@@ -80,6 +96,124 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    func registerNotification() {
+        
+        // 1. Create the actions **************************************************
+        
+        // increment Action
+        let incrementAction = UIMutableUserNotificationAction()
+        incrementAction.identifier = Actions.increment.toRaw()
+        incrementAction.title = "ADD +1!"
+        incrementAction.activationMode = UIUserNotificationActivationMode.Background
+        incrementAction.authenticationRequired = true
+        incrementAction.destructive = false
+        
+        // decrement Action
+        let decrementAction = UIMutableUserNotificationAction()
+        decrementAction.identifier = Actions.decrement.toRaw()
+        decrementAction.title = "SUB -1"
+        decrementAction.activationMode = UIUserNotificationActivationMode.Background
+        decrementAction.authenticationRequired = true
+        decrementAction.destructive = false
+        
+        // reset Action
+        let resetAction = UIMutableUserNotificationAction()
+        resetAction.identifier = Actions.reset.toRaw()
+        resetAction.title = "RESET"
+        resetAction.activationMode = UIUserNotificationActivationMode.Foreground
+        // NOT USED resetAction.authenticationRequired = true
+        resetAction.destructive = true
+        
+        
+        // 2. Create the category ***********************************************
+        
+        // Category
+        let counterCategory = UIMutableUserNotificationCategory()
+        counterCategory.identifier = categoryID
+        
+        // A. Set actions for the default context
+        counterCategory.setActions([incrementAction, decrementAction, resetAction],
+            forContext: UIUserNotificationActionContext.Default)
+        
+        // B. Set actions for the minimal context
+        counterCategory.setActions([incrementAction, decrementAction],
+            forContext: UIUserNotificationActionContext.Minimal)
+        
+        
+        // 3. Notification Registration *****************************************
+        
+        let types = UIUserNotificationType.Alert | UIUserNotificationType.Sound
+        let settings = UIUserNotificationSettings(forTypes: types, categories: NSSet(object: counterCategory))
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+    }
+    
+    func forFlash(string :NSString) {
+        var notification: UILocalNotification = UILocalNotification()
+        notification.fireDate = NSDate()
+        //        notification.timeZone = NSTimeZone.defaultTimeZone()
+        notification.alertBody = "You copy \(string)"
+        //        notification.alertAction = "Open"
+        notification.category = categoryID
+        //        notification.hasAction = true
+        notification.soundName = UILocalNotificationDefaultSoundName
+        //        notification.applicationIconBadgeNumber = 1
+        //        notification.userInfo = ["uoo": "kkkk"]
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
+    
+    func scheduleNotification() {
+        //UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
+        // Schedule the notification ********************************************
+        if UIApplication.sharedApplication().scheduledLocalNotifications.count == 0 {
+            
+            let notification = UILocalNotification()
+            notification.alertBody = "Hey! Update your counter ;)"
+            notification.soundName = UILocalNotificationDefaultSoundName
+            notification.fireDate = NSDate()
+            notification.category = categoryID
+            notification.repeatInterval = NSCalendarUnit.CalendarUnitMinute
+            
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        println("didRegisterUserNotificationSettings")
+//        scheduleNotification()
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+            println("handleActionWithIdentifier")
+//            NSLog("notification:%@", notification)
+        
+            // Handle notification action *****************************************
+//            if notification.category == "NormalFlashIdentifier" {
+//                
+//                let action:Actions = Actions.fromRaw(identifier!)!
+//                let counter = Counter();
+//                
+//                switch action{
+//                    
+//                case Actions.increment:
+//                    counter++
+//                    
+//                case Actions.decrement:
+//                    counter--
+//                    
+//                case Actions.reset:
+//                    counter.currentTotal = 0
+//                    
+//                }
+//            }
+        
+            completionHandler()
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        println("didReceiveLocalNotification")
     }
 
     // MARK: - Core Data stack
