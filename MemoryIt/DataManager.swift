@@ -83,7 +83,7 @@ class DataManager  {
         else {
             var array = Article.find(urlString, managedObjectContext: self.managedObjectContext!)
             var firstArticle: Article = array[0] as Article
-            UILocalNotification.forArticle(firstArticle.title)
+            NotificationManager.sharedInstance.forArticle(firstArticle.title)
         }
         
         
@@ -125,12 +125,12 @@ class DataManager  {
         
         Article.showAll(self.managedObjectContext!)
 
-        UILocalNotification.forArticle(title)
+        NotificationManager.sharedInstance.forArticle(title)
     }
     
     
     func detectVocabulary(string: NSString) {
-        UILocalNotification.forFlash(string)
+        NotificationManager.sharedInstance.forFlash(string)
         return
         var findVocabulary: [Vocabulary] = Vocabulary.find(string, managedObjectContext: self.managedObjectContext!)
         if findVocabulary.count == 0 {
@@ -159,7 +159,7 @@ class DataManager  {
             }
         }
         
-        UILocalNotification.forFlash(string)
+        NotificationManager.sharedInstance.forFlash(string)
         
         Vocabulary.showAll(self.managedObjectContext!)
     }
@@ -208,4 +208,17 @@ class DataManager  {
             NSLog("match:%@", string)
         }
     }
+    
+    func lockToFlash() {
+        println("lockToFlash")
+        NotificationManager.sharedInstance.forFlash("kk1")
+        NotificationManager.sharedInstance.forFlash("kk2")
+        NotificationManager.sharedInstance.forFlash("kk3")
+    }
+    
+    func unlockToClear() {
+        println("unlockToClear")
+        NotificationManager.sharedInstance.clearAllFlash()
+    }
+    
 }
