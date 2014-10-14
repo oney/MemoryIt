@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        println("string:\(removeScriptString)")
         
         
-        DataManager.sharedInstance.runnn()
+//        DataManager.sharedInstance.runnn()
         return true
     }
     

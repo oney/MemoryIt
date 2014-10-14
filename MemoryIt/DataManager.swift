@@ -57,27 +57,15 @@ class DataManager  {
     }
     
     func detectNewContent(string: NSString) {
-        if isUrl(string) {
+        if string.isUrl() {
             detectUrl(string)
         }
-        else if isArticle(string) {
+        else if string.isArticle() {
             
         }
         else {
             detectVocabulary(string)
         }
-    }
-    
-    func isUrl(string: NSString) -> Bool {
-        var pattern = "(http|https):\\/\\/(www\\.)?"
-        var error: NSError?
-        var regex: NSRegularExpression = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
-        var result: Int = regex.numberOfMatchesInString(string, options: NSMatchingOptions.Anchored, range: NSMakeRange(0, string.length))
-        return result > 0
-    }
-    
-    func isArticle(string: NSString) -> Bool {
-        return false
     }
     
     func detectUrl(urlString: NSString) {
@@ -95,7 +83,7 @@ class DataManager  {
         else {
             var array = Article.find(urlString, managedObjectContext: self.managedObjectContext!)
             var firstArticle: Article = array[0] as Article
-            self.generateUrlNotification(firstArticle.title)
+            UILocalNotification.forArticle(firstArticle.title)
         }
         
         
@@ -137,7 +125,7 @@ class DataManager  {
         
         Article.showAll(self.managedObjectContext!)
 
-        self.generateUrlNotification(title)
+        UILocalNotification.forArticle(title)
     }
     
     
@@ -166,41 +154,14 @@ class DataManager  {
                 sentence.content = sentenceString
                 sentence.article = self.backgroundContext!.objectWithID(article.objectID) as Article
                 
-//                var sentencesInArticle: NSMutableSet = article.mutableSetValueForKey("sentences")
-//                sentencesInArticle.addObject(sentence)
-                
                 saveContext()
             }
         }
         
-//        generateNotification(string)
+        UILocalNotification.forVocabulary(string)
         
         Vocabulary.showAll(self.managedObjectContext!)
     }
-    
-    func generateNotification(string :NSString) {
-        var notification :UILocalNotification = UILocalNotification()
-        notification.fireDate = NSDate()
-        notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.alertBody = "You copy \(string)"
-        notification.alertAction = "Open"
-        notification.hasAction = true
-        notification.applicationIconBadgeNumber = 0
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
-    }
-    
-    func generateUrlNotification(string :NSString) {
-        var notification :UILocalNotification = UILocalNotification()
-        notification.fireDate = NSDate()
-        notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.alertBody = "Article: \(string)"
-        notification.alertAction = "Open"
-        notification.hasAction = true
-        notification.applicationIconBadgeNumber = 0
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
-    }
-    
-    
     
     func fetchTitle(array: NSArray) -> NSString {
         if array.count == 0 {
