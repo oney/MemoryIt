@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             var content :NSString = ""
             for var i = 0; i < 1000; i++ {
                 if !content.isEqualToString(UIPasteboard.generalPasteboard().string!) {
