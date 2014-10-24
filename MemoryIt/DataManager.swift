@@ -72,7 +72,7 @@ class DataManager  {
         
         var inexist: Bool = Article.checkInexist(urlString, managedObjectContext: self.managedObjectContext!)
         if inexist {
-            var URL: NSURL = NSURL(string: urlString);
+            var URL: NSURL = NSURL(string: urlString)!;
             var request: NSURLRequest = NSURLRequest(URL: URL, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60)
             var response: NSURLResponse?
             var error: NSError?
@@ -103,7 +103,7 @@ class DataManager  {
     
     func parseHtml(urlString: NSString, data responseObject: AnyObject!) {
         println("parseHtml:\(urlString)")
-        var string: NSString = NSString(data: responseObject as NSData, encoding: NSUTF8StringEncoding)
+        var string: NSString = NSString(data: responseObject as NSData, encoding: NSUTF8StringEncoding)!
         string = removeString(string, by: "<script\\b[^<]*(?:(?!<\\/script>)<[^<]*)*<\\/script>")
         
         var data: NSData = string.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -130,7 +130,7 @@ class DataManager  {
     
     
     func detectVocabulary(string: NSString) {
-        NotificationManager.sharedInstance.forFlash(string)
+        NotificationManager.sharedInstance.forVocabulary(string)
         return
         var findVocabulary: [Vocabulary] = Vocabulary.find(string, managedObjectContext: self.managedObjectContext!)
         if findVocabulary.count == 0 {
@@ -190,14 +190,14 @@ class DataManager  {
     
     func removeString(string: NSString, by pattern: NSString) -> NSString {
         var error: NSError?
-        var regex: NSRegularExpression = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+        var regex: NSRegularExpression = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)!
         return regex.stringByReplacingMatchesInString(string, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, string.length), withTemplate: "")
     }
     
     func findWord2(word: NSString, by article: NSString) {
         var find: NSString = "\\.\\s[^(\\.)]*communication[^(\\.)]*\\.\\s" // \.\s[^(\.)]*communication[^(\.)]*\.\s
         var error: NSError?
-        var regex: NSRegularExpression = NSRegularExpression(pattern: "", options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+        var regex: NSRegularExpression = NSRegularExpression(pattern: "", options: NSRegularExpressionOptions.CaseInsensitive, error: &error)!
         var matches: NSArray = regex.matchesInString(article, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, article.length))
         
         for match in matches {

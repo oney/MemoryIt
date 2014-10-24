@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    var bgTask: BackgroundTask = BackgroundTask()
+    var currentContent: NSString = ""
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")) {
@@ -21,19 +23,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
 //        DataManager.sharedInstance.runnn()
-        Converter.sharedInstance().registerDeviceLock({
-            (event: String!) in
-            println("event:\(event)")
-            NotificationManager.sharedInstance.lockEvent(event)
-        })
+//        NotificationManager.sharedInstance.registerDeviceLock()
         NotificationManager.sharedInstance.registerNotification()
+        
+        bgTask.startBackgroundTasks(2, target:self, selector: Selector("backgroundCallback:"))
+        NotificationManager.sharedInstance.registerDeviceLock()
         return true
     }
     
+    func backgroundCallback(info: AnyObject) {
+        NSLog("App in BG, backgroundTimeRemaining %f sec", UIApplication.sharedApplication().backgroundTimeRemaining)
+        var paste = Converter.sharedInstance().pasteboardString()
+        NSLog("paste:%@", paste)
+        if paste != "" {
+            if !currentContent.isEqualToString(UIPasteboard.generalPasteboard().string!) {
+                currentContent = UIPasteboard.generalPasteboard().string!
+                println("new content:\(currentContent)")
+                //                        NotificationManager.sharedInstance.forFlash(content)
+                DataManager.sharedInstance.detectNewContent(currentContent)
+            }
+        }
+    }
+    
     func pasteboardChanged(application: UIApplication) {
+        NSLog("pasteboardChanged")
+        NotificationManager.sharedInstance.registerDeviceLock()
+        
+        var locationManager: CLLocationManager = CLLocationManager()
         
         var task : UIBackgroundTaskIdentifier!
         task = application.beginBackgroundTaskWithExpirationHandler({
+//            self.pasteboardChanged(application)
             application.endBackgroundTask(task)
         })
         
@@ -42,16 +62,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            
+            locationManager.startUpdatingLocation()
+            
             var content :NSString = ""
-            for var i = 0; i < 1000; i++ {
+            var flag = true
+            while flag {
+                NSLog("App in BG, backgroundTimeRemaining %f sec", application.backgroundTimeRemaining)
                 var paste = Converter.sharedInstance().pasteboardString()
+                NSLog("paste:%@", paste)
                 if paste != "" {
                     if !content.isEqualToString(UIPasteboard.generalPasteboard().string!) {
                         content = UIPasteboard.generalPasteboard().string!
                         println("new content:\(content)")
 //                        NotificationManager.sharedInstance.forFlash(content)
-//                        DataManager.sharedInstance.detectNewContent(content)
+                        DataManager.sharedInstance.detectNewContent(content)
                     }
+                    flag = false
+                    flag = true
                 }
                 NSThread.sleepForTimeInterval(1)
             }
@@ -60,20 +88,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(application: UIApplication) {
-        
+        println("applicationWillResignActive")
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        pasteboardChanged(application)
+//        pasteboardChanged(application)
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
+        println("applicationDidBecomeActive")
     }
 
     func applicationWillTerminate(application: UIApplication) {
+        println("applicationWillTerminate")
         DataManager.sharedInstance.saveContext()
     }
     
@@ -85,6 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("handleActionWithIdentifier")
         NSLog("notification:%@", notification)
         NotificationManager.sharedInstance.handleActionWithIdentifier(identifier, notification: notification)
+        NotificationManager.sharedInstance.registerDeviceLock()
         completionHandler()
     }
     

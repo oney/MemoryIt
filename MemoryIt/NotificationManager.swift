@@ -12,15 +12,21 @@ private let _NotificationManagerSharedInstance = NotificationManager()
 
 class NotificationManager {
     
-    enum Actions:String{
-        case increment = "INCREMENT_ACTION"
-        case decrement = "DECREMENT_ACTION"
-        case reset = "RESET_ACTION"
+    enum FlashActions:String{
+        case memory = "MEMORY_ACTION"
+        case forget = "FORGET_ACTION"
+        case ok = "OK_ACTION"
+        case mark = "MARK_ACTION"
     }
     
-    var categoryID:String {
+    var flashID:String {
         get{
-            return "COUNTER_CATEGORY"
+            return "FLASH_ID"
+        }
+    }
+    var flashMeaningID:String {
+        get{
+            return "FLASH_MEANING_ID"
         }
     }
     
@@ -38,6 +44,7 @@ class NotificationManager {
         notification.timeZone = NSTimeZone.defaultTimeZone()
         notification.alertBody = "You copy \(string)"
         notification.alertAction = "Open"
+        
         notification.hasAction = true
         notification.applicationIconBadgeNumber = 0
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
@@ -56,104 +63,102 @@ class NotificationManager {
     
     func registerNotification() {
         
-        // 1. Create the actions **************************************************
-        
-        // increment Action
+        let types = UIUserNotificationType.Badge
+        let settings = UIUserNotificationSettings(forTypes: types, categories: NSSet(objects: flashCategory(), flashMeaningCategory()))
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+    }
+    
+    func flashCategory() -> UIMutableUserNotificationCategory {
         let incrementAction = UIMutableUserNotificationAction()
-        incrementAction.identifier = Actions.increment.toRaw()
-        incrementAction.title = "ADD +1!"
+        incrementAction.identifier = FlashActions.memory.rawValue
+        incrementAction.title = "記得"
         incrementAction.activationMode = UIUserNotificationActivationMode.Background
         incrementAction.authenticationRequired = true
         incrementAction.destructive = false
         
-        // decrement Action
         let decrementAction = UIMutableUserNotificationAction()
-        decrementAction.identifier = Actions.decrement.toRaw()
-        decrementAction.title = "SUB -1"
+        decrementAction.identifier = FlashActions.forget.rawValue
+        decrementAction.title = "忘了"
         decrementAction.activationMode = UIUserNotificationActivationMode.Background
         decrementAction.authenticationRequired = true
         decrementAction.destructive = false
         
-        // reset Action
-        let resetAction = UIMutableUserNotificationAction()
-        resetAction.identifier = Actions.reset.toRaw()
-        resetAction.title = "RESET"
-        resetAction.activationMode = UIUserNotificationActivationMode.Foreground
-        // NOT USED resetAction.authenticationRequired = true
-        resetAction.destructive = true
-        
-        
-        // 2. Create the category ***********************************************
-        
-        // Category
         let counterCategory = UIMutableUserNotificationCategory()
-        counterCategory.identifier = categoryID
+        counterCategory.identifier = flashID
         
-        // A. Set actions for the default context
-        counterCategory.setActions([incrementAction, decrementAction, resetAction],
-            forContext: UIUserNotificationActionContext.Default)
-        
-        // B. Set actions for the minimal context
         counterCategory.setActions([incrementAction, decrementAction],
             forContext: UIUserNotificationActionContext.Minimal)
         
+        return counterCategory
+    }
+    
+    func flashMeaningCategory() -> UIMutableUserNotificationCategory {
+        let incrementAction = UIMutableUserNotificationAction()
+        incrementAction.identifier = FlashActions.ok.rawValue
+        incrementAction.title = "了解"
+        incrementAction.activationMode = UIUserNotificationActivationMode.Background
+        incrementAction.authenticationRequired = true
+        incrementAction.destructive = false
         
-        // 3. Notification Registration *****************************************
+        let decrementAction = UIMutableUserNotificationAction()
+        decrementAction.identifier = FlashActions.mark.rawValue
+        decrementAction.title = "標記"
+        decrementAction.activationMode = UIUserNotificationActivationMode.Background
+        decrementAction.authenticationRequired = true
+        decrementAction.destructive = false
         
-        let types = UIUserNotificationType.Alert | UIUserNotificationType.Sound
-        let settings = UIUserNotificationSettings(forTypes: types, categories: NSSet(object: counterCategory))
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        let counterCategory = UIMutableUserNotificationCategory()
+        counterCategory.identifier = flashMeaningID
+        
+        counterCategory.setActions([incrementAction, decrementAction],
+            forContext: UIUserNotificationActionContext.Minimal)
+        
+        return counterCategory
     }
     
     func forFlash(string :NSString) {
         var notification: UILocalNotification = UILocalNotification()
         notification.fireDate = NSDate()
-        //        notification.timeZone = NSTimeZone.defaultTimeZone()
         notification.alertBody = "You copy \(string)"
-        //        notification.alertAction = "Open"
-        notification.category = categoryID
-        //        notification.hasAction = true
+        notification.category = flashID
         notification.soundName = UILocalNotificationDefaultSoundName
-        //        notification.applicationIconBadgeNumber = 1
-                notification.userInfo = ["uoo": "kkkk"]
+                notification.userInfo = ["word": string]
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
-    func scheduleNotification() {
-        //UIApplication.sharedApplication().cancelAllLocalNotifications()
-        
-        // Schedule the notification ********************************************
-        if UIApplication.sharedApplication().scheduledLocalNotifications.count == 0 {
-            
-            let notification = UILocalNotification()
-            notification.alertBody = "Hey! Update your counter ;)"
-            notification.soundName = UILocalNotificationDefaultSoundName
-            notification.fireDate = NSDate()
-            notification.category = categoryID
-            notification.repeatInterval = NSCalendarUnit.CalendarUnitMinute
-            
-            UIApplication.sharedApplication().scheduleLocalNotification(notification)
-        }
+    func createFlashMeaning(string :NSString) {
+        var notification: UILocalNotification = UILocalNotification()
+        notification.fireDate = NSDate()
+        notification.alertBody = "\(string) meaning is kkkk"
+        notification.category = flashMeaningID
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["uoo": "kkkk"]
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     func handleActionWithIdentifier(identifier: String?, notification: UILocalNotification) {
-        if notification.category == categoryID {
-            let action:Actions = Actions.fromRaw(identifier!)!
+        if notification.category == flashID {
+            let action: FlashActions = FlashActions(rawValue: identifier!)!
+            var userInfo: [NSObject : AnyObject] = notification.userInfo!
+            var word: NSString = userInfo["word"] as NSString
             
             switch action{
-            case Actions.increment:
-                println("increment")
-                
-            case Actions.decrement:
-                println("increment")
-                
-            case Actions.reset:
-                println("reset")
+            case FlashActions.memory:
+                println("memory good")
+            case FlashActions.forget:
+                createFlashMeaning(word)
+            default:
+                println("hi good")
             }
+        }
+        else if notification.category == flashMeaningID {
         }
     }
     
     func lockEvent(string: String) {
+        if string == "DEVICE LOCKED" {
+            lockCount = 0
+        }
         lockCount++
         if lockCount > 2 {
             locked = false
@@ -170,5 +175,13 @@ class NotificationManager {
     
     func clearAllFlash() {
         UIApplication.sharedApplication().cancelAllLocalNotifications()
+    }
+    
+    func registerDeviceLock() {
+        Converter.sharedInstance().registerDeviceLock({
+            (event: String!) in
+            println("event:\(event)")
+            NotificationManager.sharedInstance.lockEvent(event)
+        })
     }
 }

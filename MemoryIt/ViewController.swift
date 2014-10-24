@@ -8,11 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, WordCellDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, WordCellDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var datas: NSMutableArray = ["yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", "yoo", "kkk", ]
-    var wordSelectedArray: WordSelectedArray = WordSelectedArray()
+    var datas: [WordCellEntity] = [WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +19,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionView.reloadData()
         NSLog("paperFoldView:%@", NSStringFromCGRect(self.view.frame))
     }
-    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return datas.count
@@ -30,13 +28,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: WordCell = collectionView.dequeueReusableCellWithReuseIdentifier("WordCell", forIndexPath: indexPath) as WordCell
         cell.delegate = self
-        cell.word.text = datas[indexPath.row] as NSString
+        cell.wordCellEntity = datas[indexPath.row]
+//        cell.word.text = datas[indexPath.row] as NSString
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if wordSelectedArray.isSelected(indexPath.row) {
+        if datas[indexPath.row].bottomOpen {
             return CGSizeMake(375, 100)
         }
         return CGSizeMake(375, 40)
@@ -46,10 +45,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         NSLog("paperFoldView:%@", NSStringFromCGRect(cell.paperFoldView.frame))
         NSLog("container:%@", NSStringFromCGRect(cell.container.frame))
 //        collectionView.collectionViewLayout.invalidateLayout()
-        var indexPath: NSIndexPath = collectionView.indexPathForCell(cell)!
-        wordSelectedArray.toggleSelect(indexPath.row)
+//        var indexPath: NSIndexPath = collectionView.indexPathForCell(cell)!
+//        wordSelectedArray.toggleSelect(indexPath.row)
         collectionView.performBatchUpdates({}, completion: { (Bool) in
-            cell.paperFoldView.frame = CGRectMake(0, 0, self.view.frame.size.width, 40)
+//            cell.paperFoldView.frame = CGRectMake(0, 0, self.view.frame.size.width, 40)
         })
 //        weak var weakCell: WordCell? = cell
 //        UIView.transitionWithView(weakCell!, duration: 0.8, options: UIViewAnimationOptions.CurveLinear, animations: {
@@ -57,6 +56,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 //            newFrame.size = CGSizeMake(newFrame.size.width, 100)
 //            weakCell!.frame = newFrame
 //            }, completion: nil)
+    }
+    
+    func wordCellPaperPan(cell: WordCell, panGestureRecognizer: UIPanGestureRecognizer) {
+        NSLog("wordCellPaperPan:%@", panGestureRecognizer)
+        var isDragging = panGestureRecognizer.state == UIGestureRecognizerState.Ended || panGestureRecognizer.state == UIGestureRecognizerState.Cancelled
+        println("isDragging:\(isDragging)")
+        isDragging = !isDragging
+        collectionView.scrollEnabled = !isDragging
     }
 }
 

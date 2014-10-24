@@ -21,6 +21,8 @@
 		6B2C36F219ECD3F7005795CD /* NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C36F119ECD3F7005795CD /* NSString.swift */; };
 		6B2C36F619ED0C24005795CD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C36F519ED0C24005795CD /* NotificationManager.swift */; };
 		6B2C36FA19ED2CDF005795CD /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C36F919ED2CDF005795CD /* Converter.m */; };
+		6B2C36FD19EE2003005795CD /* BackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C36FC19EE2003005795CD /* BackgroundTask.m */; };
+		6B2C36FF19EFB89F005795CD /* WordCellEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C36FE19EFB89F005795CD /* WordCellEntity.swift */; };
 		6B51185019EADFF5009F52F8 /* WordSelectedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */; };
 		6B51185719EC078B009F52F8 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185619EC078B009F52F8 /* Article.swift */; };
 		6B51185D19EC5555009F52F8 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185C19EC5555009F52F8 /* Sentence.swift */; };
@@ -59,6 +61,9 @@
 		6B2C36F519ED0C24005795CD /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		6B2C36F819ED2CDF005795CD /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
 		6B2C36F919ED2CDF005795CD /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
+		6B2C36FB19EE2003005795CD /* BackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTask.h; sourceTree = "<group>"; };
+		6B2C36FC19EE2003005795CD /* BackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTask.m; sourceTree = "<group>"; };
+		6B2C36FE19EFB89F005795CD /* WordCellEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCellEntity.swift; sourceTree = "<group>"; };
 		6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSelectedArray.swift; sourceTree = "<group>"; };
 		6B51185619EC078B009F52F8 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		6B51185C19EC5555009F52F8 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 				6B51185619EC078B009F52F8 /* Article.swift */,
 				6B51185C19EC5555009F52F8 /* Sentence.swift */,
 				6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */,
+				6B2C36FE19EFB89F005795CD /* WordCellEntity.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -199,6 +205,8 @@
 			children = (
 				6B2C36F819ED2CDF005795CD /* Converter.h */,
 				6B2C36F919ED2CDF005795CD /* Converter.m */,
+				6B2C36FB19EE2003005795CD /* BackgroundTask.h */,
+				6B2C36FC19EE2003005795CD /* BackgroundTask.m */,
 			);
 			name = ObjectiveC;
 			sourceTree = "<group>";
@@ -362,6 +370,8 @@
 				6B2C36FA19ED2CDF005795CD /* Converter.m in Sources */,
 				6BDC943219E9CF9700A6FB3D /* WordCell.swift in Sources */,
 				6B01001019E839EF006D4E02 /* Vocabulary.swift in Sources */,
+				6B2C36FD19EE2003005795CD /* BackgroundTask.m in Sources */,
+				6B2C36FF19EFB89F005795CD /* WordCellEntity.swift in Sources */,
 				6B51185719EC078B009F52F8 /* Article.swift in Sources */,
 				6B2C36F619ED0C24005795CD /* NotificationManager.swift in Sources */,
 				6B51185D19EC5555009F52F8 /* Sentence.swift in Sources */,
@@ -444,7 +454,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -480,7 +490,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

@@ -43,19 +43,18 @@ static void displayStatusChanged(CFNotificationCenterRef center, void *observer,
 - (void)registerDeviceLock:(DeviceLockBlock)handler
 {
     self.deviceLockBlock = handler;
-    //Screen lock notifications
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), //center
-                                    NULL, // observer
-                                    displayStatusChanged, // callback
-                                    CFSTR("com.apple.springboard.lockcomplete"), // event name
-                                    NULL, // object
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+                                    NULL,
+                                    displayStatusChanged,
+                                    CFSTR("com.apple.springboard.lockcomplete"),
+                                    NULL,
                                     CFNotificationSuspensionBehaviorDeliverImmediately);
     
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), //center
-                                    NULL, // observer
-                                    displayStatusChanged, // callback
-                                    CFSTR("com.apple.springboard.lockstate"), // event name
-                                    NULL, // object
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+                                    NULL,
+                                    displayStatusChanged,
+                                    CFSTR("com.apple.springboard.lockstate"),
+                                    NULL,
                                     CFNotificationSuspensionBehaviorDeliverImmediately);
 }
 

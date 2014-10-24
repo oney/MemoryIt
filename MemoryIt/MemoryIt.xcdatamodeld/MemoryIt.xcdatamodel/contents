@@ -6,6 +6,10 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="sentences" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sentence" inverseName="article" inverseEntity="Sentence" syncable="YES"/>
     </entity>
+    <entity name="Card" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="vocabularys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vocabulary" inverseName="card" inverseEntity="Vocabulary" syncable="YES"/>
+    </entity>
     <entity name="Sentence" representedClassName="Sentence" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="article" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Article" inverseName="sentences" inverseEntity="Article" syncable="YES"/>
@@ -13,13 +17,16 @@
     </entity>
     <entity name="Vocabulary" representedClassName="Vocabulary" syncable="YES">
         <attribute name="meaning" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phonetic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="vocabularys" inverseEntity="Card" syncable="YES"/>
         <relationship name="sentences" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sentence" inverseName="vocabularys" inverseEntity="Sentence" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Vocabulary" positionX="-63" positionY="-18" width="128" height="103"/>
         <element name="Article" positionX="-63" positionY="9" width="128" height="103"/>
         <element name="Sentence" positionX="-54" positionY="45" width="128" height="88"/>
+        <element name="Vocabulary" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Card" positionX="-54" positionY="45" width="128" height="73"/>
     </elements>
 </model>

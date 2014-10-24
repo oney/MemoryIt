@@ -6,3 +6,4 @@
 #import <PaperFold/PaperFoldView.h>
 #import "TFHpple.h"
 #import "Converter.h"
+#import "BackgroundTask.h"

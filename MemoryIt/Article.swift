@@ -61,7 +61,7 @@ class Article: NSManagedObject {
         var article: NSString = content
         
         var error: NSError?
-        var regex: NSRegularExpression = NSRegularExpression(pattern: word, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+        var regex: NSRegularExpression = NSRegularExpression(pattern: word, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)!
         var matches: NSArray = regex.matchesInString(article, options: NSMatchingOptions.ReportProgress, range: NSMakeRange(0, article.length))
         
         

@@ -12,7 +12,7 @@ extension NSString {
     func isUrl() -> Bool {
         var pattern = "(http|https):\\/\\/(www\\.)?"
         var error: NSError?
-        var regex: NSRegularExpression = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+        var regex: NSRegularExpression = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)!
         var result: Int = regex.numberOfMatchesInString(self, options: NSMatchingOptions.Anchored, range: NSMakeRange(0, self.length))
         return result > 0
     }
