@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="MemoryIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="ViewController" customModule="MemoryIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -17,9 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dq2-lP-K3w">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blur-bg-1" translatesAutoresizingMaskIntoConstraints="NO" id="GJu-fZ-pjz">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dq2-lP-K3w">
+                                <rect key="frame" x="10" y="0.0" width="580" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <inset key="scrollIndicatorInsets" minX="0.0" minY="60" maxX="0.0" maxY="0.0"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.5" minimumInteritemSpacing="0.5" id="QbE-ja-ivB">
                                     <size key="itemSize" width="600" height="40"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -35,14 +39,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="GJu-fZ-pjz" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="QUX-t0-psY"/>
+                            <constraint firstAttribute="trailing" secondItem="GJu-fZ-pjz" secondAttribute="trailing" id="U7e-CM-hSG"/>
+                            <constraint firstAttribute="bottom" secondItem="GJu-fZ-pjz" secondAttribute="bottom" id="bnO-PU-pym"/>
                             <constraint firstAttribute="bottom" secondItem="Dq2-lP-K3w" secondAttribute="bottom" id="frn-5N-XUA"/>
                             <constraint firstItem="Dq2-lP-K3w" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="hSg-9o-1Ys"/>
-                            <constraint firstItem="Dq2-lP-K3w" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="jda-sa-aUP"/>
-                            <constraint firstAttribute="trailing" secondItem="Dq2-lP-K3w" secondAttribute="trailing" id="xGM-ph-OPK"/>
+                            <constraint firstItem="Dq2-lP-K3w" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="jda-sa-aUP"/>
+                            <constraint firstItem="GJu-fZ-pjz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="u9x-HL-ZQJ"/>
+                            <constraint firstAttribute="trailing" secondItem="Dq2-lP-K3w" secondAttribute="trailing" constant="10" id="xGM-ph-OPK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TWJ-hU-Bp4">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="gTP-wA-HbW">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="vXZ-lx-hvc" id="luu-kc-kqt"/>
                             </connections>
@@ -117,4 +126,7 @@
             <point key="canvasLocation" x="230" y="1120"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="blur-bg-1" width="340" height="600"/>
+    </resources>
 </document>

@@ -29,6 +29,7 @@ class WordCell: UICollectionViewCell, PaperFoldViewDelegate, UIGestureRecognizer
     
     func configureView() {
         paperFoldView = PaperFoldView(frame: CGRectMake(0, 0, bounds.size.width, 40))
+        paperFoldView.backgroundColor = UIColor.clearColor()
         paperFoldView.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
         addSubview(paperFoldView)
         paperFoldView.delegate = self
@@ -55,6 +56,7 @@ class WordCell: UICollectionViewCell, PaperFoldViewDelegate, UIGestureRecognizer
         
         bottomFold.frame = CGRectMake(0, 40, bounds.size.width, 60)
         addSubview(bottomFold)
+        paperFoldView.backgroundColor = UIColor.clearColor()
     }
     
     func paperFoldView(paperFoldView: AnyObject!, didFoldAutomatically automated: Bool, toState paperFoldState: PaperFoldState) {

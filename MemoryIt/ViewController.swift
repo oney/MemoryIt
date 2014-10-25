@@ -11,10 +11,18 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, WordCellDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var datas: [WordCellEntity] = [WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity()]
+    var datas: [WordCellEntity] = [WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity(),WordCellEntity()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        collectionView.layer.shadowColor = UIColor.blackColor().CGColor
+//        collectionView.layer.shadowOpacity = 0.5
+//        collectionView.layer.shadowOffset = CGSizeMake(0, 0)
+//        collectionView.layer.shouldRasterize = true
+//        collectionView.layer.rasterizationScale = UIScreen.mainScreen().scale
+        
+        navigationController?.navigationBar.barTintColor = UIColor(red: 28/255.0, green: 43/255.0, blue: 62/255.0, alpha: 1.0)
+        collectionView.contentInset = UIEdgeInsetsMake(72, 0, 10, 0)
         collectionView.registerNib(UINib(nibName: "WordCell", bundle: nil), forCellWithReuseIdentifier: "WordCell")
         collectionView.reloadData()
         NSLog("paperFoldView:%@", NSStringFromCGRect(self.view.frame))
@@ -36,9 +44,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if datas[indexPath.row].bottomOpen {
-            return CGSizeMake(375, 100)
+            return CGSizeMake(collectionView.frame.size.width, 100)
         }
-        return CGSizeMake(375, 40)
+        return CGSizeMake(collectionView.frame.size.width, 40)
     }
     
     func wordCellTap(cell: WordCell) {
