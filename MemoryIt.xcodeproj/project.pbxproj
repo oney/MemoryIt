@@ -11,6 +11,7 @@
 		6B01000B19E83870006D4E02 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B01000A19E83870006D4E02 /* DataManager.swift */; };
 		6B01001019E839EF006D4E02 /* Vocabulary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B01000F19E839EF006D4E02 /* Vocabulary.swift */; };
 		6B01001219E83F4F006D4E02 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B01001119E83F4F006D4E02 /* CoreDataStore.swift */; };
+		6B23B87C19FBEAE000E43247 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23B87B19FBEAE000E43247 /* SideMenu.swift */; };
 		6B24EA3719E80ED100342EB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24EA3619E80ED100342EB0 /* AppDelegate.swift */; };
 		6B24EA3A19E80ED100342EB0 /* MemoryIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B24EA3819E80ED100342EB0 /* MemoryIt.xcdatamodeld */; };
 		6B24EA3C19E80ED100342EB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24EA3B19E80ED100342EB0 /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 		6B01000A19E83870006D4E02 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		6B01000F19E839EF006D4E02 /* Vocabulary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vocabulary.swift; sourceTree = "<group>"; };
 		6B01001119E83F4F006D4E02 /* CoreDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
+		6B23B87B19FBEAE000E43247 /* SideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		6B24EA3119E80ED100342EB0 /* MemoryIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B24EA3519E80ED100342EB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B24EA3619E80ED100342EB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				6B24EA3B19E80ED100342EB0 /* ViewController.swift */,
+				6B23B87B19FBEAE000E43247 /* SideMenu.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				6B01001219E83F4F006D4E02 /* CoreDataStore.swift in Sources */,
 				6B2C36F219ECD3F7005795CD /* NSString.swift in Sources */,
 				6B24EA3C19E80ED100342EB0 /* ViewController.swift in Sources */,
+				6B23B87C19FBEAE000E43247 /* SideMenu.swift in Sources */,
 				6B2C36FA19ED2CDF005795CD /* Converter.m in Sources */,
 				6BDC943219E9CF9700A6FB3D /* WordCell.swift in Sources */,
 				6B01001019E839EF006D4E02 /* Vocabulary.swift in Sources */,

@@ -22,12 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
         }
         
+        
 //        DataManager.sharedInstance.runnn()
 //        NotificationManager.sharedInstance.registerDeviceLock()
         NotificationManager.sharedInstance.registerNotification()
         
         bgTask.startBackgroundTasks(2, target:self, selector: Selector("backgroundCallback:"))
         NotificationManager.sharedInstance.registerDeviceLock()
+        
+        
+        
         return true
     }
     
