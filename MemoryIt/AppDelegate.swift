@@ -11,29 +11,70 @@ import CoreData
 import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDelegate, HATransitionControllerDelegate {
     
     var window: UIWindow?
     var bgTask: BackgroundTask = BackgroundTask()
     var currentContent: NSString = ""
+    var transitionController: HATransitionController?
+    var navigationController: UINavigationController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")) {
             application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
         }
         
+        var sideMenu: RESideMenu =  window?.rootViewController as RESideMenu
+        navigationController = sideMenu.contentViewController as? UINavigationController
+        navigationController?.delegate = self
+        var paperViewController: PaperViewController = navigationController?.topViewController as PaperViewController
+        NSLog("navigationController:%@", paperViewController)
+        transitionController = HATransitionController(collectionView: paperViewController.collectionView)
+        transitionController?.delegate = self
         
-//        DataManager.sharedInstance.runnn()
+        
+        
+//        NotificationManager.sharedInstance.registerNotification()
+//        bgTask.startBackgroundTasks(2, target:self, selector: Selector("backgroundCallback:"))
 //        NotificationManager.sharedInstance.registerDeviceLock()
-        NotificationManager.sharedInstance.registerNotification()
-        
-        bgTask.startBackgroundTasks(2, target:self, selector: Selector("backgroundCallback:"))
-        NotificationManager.sharedInstance.registerDeviceLock()
         
         
         
         return true
     }
+    
+    func interactionBeganAtPoint(point: CGPoint) {
+        
+        var judgeVC: UIViewController? = navigationController?.topViewController
+        if judgeVC!.isKindOfClass(PaperViewController) {
+            var presentingVC: PaperViewController = navigationController?.topViewController as PaperViewController
+            var presentedVC: PaperViewController = presentingVC.nextViewControllerAtPoint(point) as PaperViewController
+            navigationController?.pushViewController(presentedVC, animated: true)
+        }
+        else {
+            navigationController?.popViewControllerAnimated(true)
+        }
+    }
+    
+    func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        if animationController === transitionController {
+            return transitionController
+        }
+        return nil
+    }
+    
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if !fromVC.isKindOfClass(UICollectionViewController) || !toVC.isKindOfClass(UICollectionViewController) {
+            return nil
+        }
+        if transitionController?.hasActiveInteraction == false {
+            return nil
+        }
+        
+        transitionController?.navigationOperation = operation
+        return transitionController
+    }
+    
     
     func backgroundCallback(info: AnyObject) {
         NSLog("App in BG, backgroundTimeRemaining %f sec", UIApplication.sharedApplication().backgroundTimeRemaining)

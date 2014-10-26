@@ -5,6 +5,42 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
+        <!--Paper View Controller-->
+        <scene sceneID="Hxj-8O-q3I">
+            <objects>
+                <collectionViewController storyboardIdentifier="paperViewController" id="DCO-F6-fxT" customClass="PaperViewController" customModule="MemoryIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="tZG-NT-QiM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewLayout key="collectionViewLayout" id="6QX-fo-GdM" customClass="CollectionViewSmallLayout" customModule="MemoryIt" customModuleProvider="target"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CELL_ID" id="QI6-Xf-1R3">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="DCO-F6-fxT" id="5Cg-bk-72I"/>
+                            <outlet property="delegate" destination="DCO-F6-fxT" id="PAF-ro-tRs"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="ANp-EH-29P">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="xBp-6y-Za5">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="DCO-F6-fxT" id="Y1M-UY-FUi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lLu-XG-A4P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="447" y="-249"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -92,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="cmW-a8-gDH"/>
+                        <segue destination="DCO-F6-fxT" kind="relationship" relationship="rootViewController" id="f31-xK-NI1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o78-nk-LpV" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -24,6 +24,14 @@
 		6B2C36FA19ED2CDF005795CD /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C36F919ED2CDF005795CD /* Converter.m */; };
 		6B2C36FD19EE2003005795CD /* BackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C36FC19EE2003005795CD /* BackgroundTask.m */; };
 		6B2C36FF19EFB89F005795CD /* WordCellEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C36FE19EFB89F005795CD /* WordCellEntity.swift */; };
+		6B32489C19FD48AD00BD21E7 /* HACollectionViewLargeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B32489119FD48AD00BD21E7 /* HACollectionViewLargeLayout.m */; };
+		6B32489D19FD48AD00BD21E7 /* HACollectionViewSmallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B32489319FD48AD00BD21E7 /* HACollectionViewSmallLayout.m */; };
+		6B32489E19FD48AD00BD21E7 /* HAPaperCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B32489519FD48AD00BD21E7 /* HAPaperCollectionViewController.m */; };
+		6B32489F19FD48AD00BD21E7 /* HASmallCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B32489719FD48AD00BD21E7 /* HASmallCollectionViewController.m */; };
+		6B3248A019FD48AD00BD21E7 /* HATransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B32489919FD48AD00BD21E7 /* HATransitionController.m */; };
+		6B3248A119FD48AD00BD21E7 /* HATransitionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B32489B19FD48AD00BD21E7 /* HATransitionLayout.m */; };
+		6B3248A319FD4B0100BD21E7 /* PaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3248A219FD4B0100BD21E7 /* PaperViewController.swift */; };
+		6B3248A719FD52C400BD21E7 /* CollectionViewSmallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3248A619FD52C400BD21E7 /* CollectionViewSmallLayout.swift */; };
 		6B51185019EADFF5009F52F8 /* WordSelectedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */; };
 		6B51185719EC078B009F52F8 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185619EC078B009F52F8 /* Article.swift */; };
 		6B51185D19EC5555009F52F8 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185C19EC5555009F52F8 /* Sentence.swift */; };
@@ -66,6 +74,20 @@
 		6B2C36FB19EE2003005795CD /* BackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTask.h; sourceTree = "<group>"; };
 		6B2C36FC19EE2003005795CD /* BackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTask.m; sourceTree = "<group>"; };
 		6B2C36FE19EFB89F005795CD /* WordCellEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCellEntity.swift; sourceTree = "<group>"; };
+		6B32489019FD48AD00BD21E7 /* HACollectionViewLargeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HACollectionViewLargeLayout.h; sourceTree = "<group>"; };
+		6B32489119FD48AD00BD21E7 /* HACollectionViewLargeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HACollectionViewLargeLayout.m; sourceTree = "<group>"; };
+		6B32489219FD48AD00BD21E7 /* HACollectionViewSmallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HACollectionViewSmallLayout.h; sourceTree = "<group>"; };
+		6B32489319FD48AD00BD21E7 /* HACollectionViewSmallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HACollectionViewSmallLayout.m; sourceTree = "<group>"; };
+		6B32489419FD48AD00BD21E7 /* HAPaperCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPaperCollectionViewController.h; sourceTree = "<group>"; };
+		6B32489519FD48AD00BD21E7 /* HAPaperCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPaperCollectionViewController.m; sourceTree = "<group>"; };
+		6B32489619FD48AD00BD21E7 /* HASmallCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HASmallCollectionViewController.h; sourceTree = "<group>"; };
+		6B32489719FD48AD00BD21E7 /* HASmallCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HASmallCollectionViewController.m; sourceTree = "<group>"; };
+		6B32489819FD48AD00BD21E7 /* HATransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATransitionController.h; sourceTree = "<group>"; };
+		6B32489919FD48AD00BD21E7 /* HATransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATransitionController.m; sourceTree = "<group>"; };
+		6B32489A19FD48AD00BD21E7 /* HATransitionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATransitionLayout.h; sourceTree = "<group>"; };
+		6B32489B19FD48AD00BD21E7 /* HATransitionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATransitionLayout.m; sourceTree = "<group>"; };
+		6B3248A219FD4B0100BD21E7 /* PaperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperViewController.swift; sourceTree = "<group>"; };
+		6B3248A619FD52C400BD21E7 /* CollectionViewSmallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSmallLayout.swift; sourceTree = "<group>"; };
 		6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSelectedArray.swift; sourceTree = "<group>"; };
 		6B51185619EC078B009F52F8 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		6B51185C19EC5555009F52F8 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
@@ -123,8 +145,10 @@
 		6B01000819E82AC5006D4E02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6B3248A219FD4B0100BD21E7 /* PaperViewController.swift */,
 				6B24EA3B19E80ED100342EB0 /* ViewController.swift */,
 				6B23B87B19FBEAE000E43247 /* SideMenu.swift */,
+				6B3248A619FD52C400BD21E7 /* CollectionViewSmallLayout.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -206,12 +230,32 @@
 		6B2C36F719ED2CB6005795CD /* ObjectiveC */ = {
 			isa = PBXGroup;
 			children = (
+				6B32488F19FD488400BD21E7 /* Paper */,
 				6B2C36F819ED2CDF005795CD /* Converter.h */,
 				6B2C36F919ED2CDF005795CD /* Converter.m */,
 				6B2C36FB19EE2003005795CD /* BackgroundTask.h */,
 				6B2C36FC19EE2003005795CD /* BackgroundTask.m */,
 			);
 			name = ObjectiveC;
+			sourceTree = "<group>";
+		};
+		6B32488F19FD488400BD21E7 /* Paper */ = {
+			isa = PBXGroup;
+			children = (
+				6B32489019FD48AD00BD21E7 /* HACollectionViewLargeLayout.h */,
+				6B32489119FD48AD00BD21E7 /* HACollectionViewLargeLayout.m */,
+				6B32489219FD48AD00BD21E7 /* HACollectionViewSmallLayout.h */,
+				6B32489319FD48AD00BD21E7 /* HACollectionViewSmallLayout.m */,
+				6B32489419FD48AD00BD21E7 /* HAPaperCollectionViewController.h */,
+				6B32489519FD48AD00BD21E7 /* HAPaperCollectionViewController.m */,
+				6B32489619FD48AD00BD21E7 /* HASmallCollectionViewController.h */,
+				6B32489719FD48AD00BD21E7 /* HASmallCollectionViewController.m */,
+				6B32489819FD48AD00BD21E7 /* HATransitionController.h */,
+				6B32489919FD48AD00BD21E7 /* HATransitionController.m */,
+				6B32489A19FD48AD00BD21E7 /* HATransitionLayout.h */,
+				6B32489B19FD48AD00BD21E7 /* HATransitionLayout.m */,
+			);
+			name = Paper;
 			sourceTree = "<group>";
 		};
 		6B51185219EBEB05009F52F8 /* Extension */ = {
@@ -370,14 +414,22 @@
 				6B01001219E83F4F006D4E02 /* CoreDataStore.swift in Sources */,
 				6B2C36F219ECD3F7005795CD /* NSString.swift in Sources */,
 				6B24EA3C19E80ED100342EB0 /* ViewController.swift in Sources */,
+				6B3248A119FD48AD00BD21E7 /* HATransitionLayout.m in Sources */,
 				6B23B87C19FBEAE000E43247 /* SideMenu.swift in Sources */,
+				6B32489E19FD48AD00BD21E7 /* HAPaperCollectionViewController.m in Sources */,
+				6B3248A019FD48AD00BD21E7 /* HATransitionController.m in Sources */,
 				6B2C36FA19ED2CDF005795CD /* Converter.m in Sources */,
 				6BDC943219E9CF9700A6FB3D /* WordCell.swift in Sources */,
 				6B01001019E839EF006D4E02 /* Vocabulary.swift in Sources */,
+				6B32489D19FD48AD00BD21E7 /* HACollectionViewSmallLayout.m in Sources */,
 				6B2C36FD19EE2003005795CD /* BackgroundTask.m in Sources */,
 				6B2C36FF19EFB89F005795CD /* WordCellEntity.swift in Sources */,
+				6B32489F19FD48AD00BD21E7 /* HASmallCollectionViewController.m in Sources */,
 				6B51185719EC078B009F52F8 /* Article.swift in Sources */,
+				6B3248A319FD4B0100BD21E7 /* PaperViewController.swift in Sources */,
+				6B3248A719FD52C400BD21E7 /* CollectionViewSmallLayout.swift in Sources */,
 				6B2C36F619ED0C24005795CD /* NotificationManager.swift in Sources */,
+				6B32489C19FD48AD00BD21E7 /* HACollectionViewLargeLayout.m in Sources */,
 				6B51185D19EC5555009F52F8 /* Sentence.swift in Sources */,
 				6B01000B19E83870006D4E02 /* DataManager.swift in Sources */,
 				6B24EA3719E80ED100342EB0 /* AppDelegate.swift in Sources */,

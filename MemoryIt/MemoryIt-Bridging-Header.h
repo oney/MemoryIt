@@ -8,3 +8,8 @@
 #import "Converter.h"
 #import "BackgroundTask.h"
 #import <RESideMenu/RESideMenu.h>
+#import "HAPaperCollectionViewController.h"
+#import "HACollectionViewLargeLayout.h"
+#import "HACollectionViewSmallLayout.h"
+#import "HATransitionController.h"
+#import "HASmallCollectionViewController.h"
