@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         var judgeVC: UIViewController? = navigationController?.topViewController
         if judgeVC!.isKindOfClass(PaperViewController) {
             var presentingVC: PaperViewController = navigationController?.topViewController as PaperViewController
-            var presentedVC: PaperViewController = presentingVC.nextViewControllerAtPoint(point) as PaperViewController
+            var presentedVC: UIViewController = presentingVC.nextViewControllerAtPoint(point) as UIViewController
             navigationController?.pushViewController(presentedVC, animated: true)
         }
         else {
