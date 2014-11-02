@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
     var currentContent: NSString = ""
     var transitionController: HATransitionController?
     var navigationController: UINavigationController?
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")) {
             application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
@@ -32,12 +32,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         transitionController = HATransitionController(collectionView: paperViewController.collectionView)
         transitionController?.delegate = self
         
-        
-        
 //        NotificationManager.sharedInstance.registerNotification()
 //        bgTask.startBackgroundTasks(2, target:self, selector: Selector("backgroundCallback:"))
 //        NotificationManager.sharedInstance.registerDeviceLock()
         
+        
+//        var button: UIButton
+//        button <- UIButtonType.Custom
+//        button <- { button in
+//            
+//        }
+//        button <- { in
+//            
+//        }
+//        button <- CGRectMake(0, 0, 100, 100)
+//        button[.Normal] <- UIImage(named: "icon.png")
+//        button[.Normal] <- "Click me"
+//        button[.Normal] <- UIColor.redColor()
+//        button[.TouchUpInside] << self.(interactionBeganAtPoint:)
+//        
+//        var textField: UITextField
+//        textField.
+//        
+//        
+//        var v: UIView = UIView()
+//        var l: UILabel = v[1001]
+//        
+//        v << l
+//        v >> l
+//        v[v1] <= v2
+//        v[v1] >= v2
+//        
+//        v[13] << l
+//        v << (v1, v2, v3)
+//        
+//        
+//        var kk: UILabel
+//        var label = UILabel <- {
+//            label in
+//            
+//        }
+//        label <- CGRectMake(0, 0, 100, 100)
+//        label <- CGPointMake(25, 25)
+//        label <- UIFont.systemFontOfSize(14)
+//        label <- 0
+//        label <- CGAffineTransformMakeScale(0.5, 0.5)
         
         
         return true
@@ -171,4 +210,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
     
 
 }
-

@@ -35,6 +35,7 @@
 		6B51185019EADFF5009F52F8 /* WordSelectedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */; };
 		6B51185719EC078B009F52F8 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185619EC078B009F52F8 /* Article.swift */; };
 		6B51185D19EC5555009F52F8 /* Sentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B51185C19EC5555009F52F8 /* Sentence.swift */; };
+		6B515EEC1A012B1E00B6AE97 /* Swiftest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B515EEB1A012B1E00B6AE97 /* Swiftest.swift */; };
 		6BDC943219E9CF9700A6FB3D /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDC943019E9CF9700A6FB3D /* WordCell.swift */; };
 		6BDC943319E9CF9700A6FB3D /* WordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDC943119E9CF9700A6FB3D /* WordCell.xib */; };
 		6BDC943519E9D4FD00A6FB3D /* WordFolds.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDC943419E9D4FD00A6FB3D /* WordFolds.xib */; };
@@ -91,6 +92,7 @@
 		6B51184F19EADFF5009F52F8 /* WordSelectedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSelectedArray.swift; sourceTree = "<group>"; };
 		6B51185619EC078B009F52F8 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		6B51185C19EC5555009F52F8 /* Sentence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sentence.swift; sourceTree = "<group>"; };
+		6B515EEB1A012B1E00B6AE97 /* Swiftest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swiftest.swift; sourceTree = "<group>"; };
 		6BDC943019E9CF9700A6FB3D /* WordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
 		6BDC943119E9CF9700A6FB3D /* WordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordCell.xib; sourceTree = "<group>"; };
 		6BDC943419E9D4FD00A6FB3D /* WordFolds.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordFolds.xib; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				6B24EA3619E80ED100342EB0 /* AppDelegate.swift */,
+				6B515EEB1A012B1E00B6AE97 /* Swiftest.swift */,
 				6B2C36F719ED2CB6005795CD /* ObjectiveC */,
 				6B01000919E82AD4006D4E02 /* View */,
 				6B01000819E82AC5006D4E02 /* Controller */,
@@ -423,6 +426,7 @@
 				6B01001019E839EF006D4E02 /* Vocabulary.swift in Sources */,
 				6B32489D19FD48AD00BD21E7 /* HACollectionViewSmallLayout.m in Sources */,
 				6B2C36FD19EE2003005795CD /* BackgroundTask.m in Sources */,
+				6B515EEC1A012B1E00B6AE97 /* Swiftest.swift in Sources */,
 				6B2C36FF19EFB89F005795CD /* WordCellEntity.swift in Sources */,
 				6B32489F19FD48AD00BD21E7 /* HASmallCollectionViewController.m in Sources */,
 				6B51185719EC078B009F52F8 /* Article.swift in Sources */,
